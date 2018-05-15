@@ -25,6 +25,16 @@ io.on("connection", socket => {
     console.log("Client disconnected");
   });
 
+  socket.emit("welcomeMessage", {
+    from: "Admin",
+    text: "Welcome to the chat app"
+  });
+
+  socket.broadcast.emit("joinMessage", {
+    from: "Admin",
+    text: "New user joined"
+  });
+
   // socket.emit('newEmail', {
   //     from: "mk@example.com",
   //     text: "Hello",
@@ -35,15 +45,22 @@ io.on("connection", socket => {
   //     console.log('Create email', email);
   // });
 
-//   socket.emit("newMessage", {
-//     from: "alex@sb.com",
-//     text: "Hi. I am Alex",
-//     createdAt: 123
-//   });
+  //   socket.emit("newMessage", {
+  //     from: "alex@sb.com",
+  //     text: "Hi. I am Alex",
+  //     createdAt: 123
+  //   });
 
   socket.on("createMessage", message => {
     console.log("Create message", message);
-    io.emit("newMessage", {
+    // io.emit("newMessage", {
+    //   from: message.from,
+    //   text: message.text,
+    //   createdAt: new Date().getTime()
+    // });
+
+    // broadcast the message to everyone except myself
+    socket.broadcast.emit("newMessage", {
       from: message.from,
       text: message.text,
       createdAt: new Date().getTime()

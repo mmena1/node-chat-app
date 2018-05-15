@@ -25,3 +25,11 @@ socket.on("disconnect", () => {
 socket.on("newMessage", function(message) {
   console.log("New message", message);
 });
+
+socket.on('welcomeMessage', function(message) {
+    console.log('Welcome Message', message);
+});
+
+socket.on('joinMessage', function(message) {
+    console.log('Join message', message);
+});
