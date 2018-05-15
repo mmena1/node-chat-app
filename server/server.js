@@ -22,7 +22,28 @@ io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.on('disconnect', () => {
-        console.log('Client disconnected')
+        console.log('Client disconnected');
+    });
+
+    // socket.emit('newEmail', {
+    //     from: "mk@example.com",
+    //     text: "Hello",
+    //     createdAt: 123
+    // });
+
+    // socket.on('createEmail', (email) => {
+    //     console.log('Create email', email);
+    // });
+
+    socket.emit('newMessage', {
+        from: 'alex@sb.com',
+        text: 'Hi. I am Alex',
+        createdAt: 123
+    });
+
+    socket.on('createMessage', (message) => {
+        console.log('Create message', message);
+        
     });
     
 });
